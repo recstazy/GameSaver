@@ -1,0 +1,19 @@
+{
+  "name": "com.recstazy.gamesaver",
+  "version": "1.5.0",
+  "displayName": "Game Saver",
+  "description": "Easier way to save-load game from and to json. Has save object validation",
+  "unity": "2018.1",
+  "unityRelease": "1f1",
+  "dependencies": {},
+ "keywords": [
+    "recstazy",
+    "utils",
+    "save"
+  ],
+  "author": {
+    "name": "Recstazy",
+    "email": "djexstas9@gmail.com",
+    "url": "https://github.com/recstazy"
+  }
+}
