@@ -1,6 +1,6 @@
 {
   "name": "com.recstazy.gamesaver",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "displayName": "Game Saver",
   "description": "Easier way to save-load game from and to json. Has save object validation",
   "unity": "2018.1",
