@@ -37,7 +37,7 @@ namespace Recstazy.GameSaver
         public static void OpenSavesDirectory()
         {
             var path = Settings.SavesFullDirectory;
-            JsonSaver.CheckOrCreateDirectory(path);
+            SaveSerializer.CheckOrCreateDirectory(path);
 
             path = path.Replace(@"/", @"\");   // explorer doesn't like front slashes
             System.Diagnostics.Process.Start("explorer.exe", "/select," + path);

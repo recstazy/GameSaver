@@ -150,8 +150,9 @@ namespace Recstazy.GameSaver
             }
             else
             {
-                JsonSaver.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
-                JsonSaver.SaveToJson(s_save, Settings.SavesFullDirectory, Settings.SaveName);
+                SaveSerializer.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
+                SaveSerializer.Serializator = Settings.SerializatorType;
+                SaveSerializer.Serialize(s_save, Settings.SavesFullDirectory, Settings.SaveName);
             }
         }
 
@@ -163,8 +164,9 @@ namespace Recstazy.GameSaver
             }
             else
             {
-                JsonSaver.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
-                s_save = JsonSaver.LoadJson<TSave>(Settings.SavesFullDirectory, Settings.SaveName);
+                SaveSerializer.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
+                SaveSerializer.Serializator = Settings.SerializatorType;
+                s_save = SaveSerializer.Deserialize<TSave>(Settings.SavesFullDirectory, Settings.SaveName);
             }
 
             if (s_save is ISaveLoadReciever saveLoadReciever)
@@ -189,8 +191,9 @@ namespace Recstazy.GameSaver
             }
             else
             {
-                JsonSaver.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
-                JsonSaver.SaveToJson(profileObj, Settings.SavesFullDirectory, GetProfileFileName(name));
+                SaveSerializer.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
+                SaveSerializer.Serializator = Settings.SerializatorType;
+                SaveSerializer.Serialize(profileObj, Settings.SavesFullDirectory, GetProfileFileName(name));
             }
         }
 
@@ -204,8 +207,9 @@ namespace Recstazy.GameSaver
             }
             else
             {
-                JsonSaver.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
-                profileObj = JsonSaver.LoadJson<TProfile>(Settings.SavesFullDirectory, GetProfileFileName(name));
+                SaveSerializer.EncryptionKey = GetEncryptionKeyWithCurrentSettings();
+                SaveSerializer.Serializator = Settings.SerializatorType;
+                profileObj = SaveSerializer.Deserialize<TProfile>(Settings.SavesFullDirectory, GetProfileFileName(name));
             }
 
             if (profileObj is ISaveLoadReciever saveLoadReciever)
@@ -230,7 +234,7 @@ namespace Recstazy.GameSaver
         public static void SaveTexture(Texture2D texture, string name)
         {
             string directory = Settings.SavesFullDirectory;
-            JsonSaver.CheckOrCreateDirectory(directory);
+            SaveSerializer.CheckOrCreateDirectory(directory);
 
             var bytes = texture.EncodeToPNG();
             File.WriteAllBytes(Path.Combine(directory, name) + ".png", bytes);

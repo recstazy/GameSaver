@@ -6,9 +6,12 @@ using System.Linq;
 
 namespace Recstazy.GameSaver
 {
+    public enum Serializator { JsonUtility = 0, Newtonsoft = 1 }
+
     [CreateAssetMenu(fileName = "GameSaverSettings", menuName = "Game Saver/Game Saver Settings", order = 131)]
     public class GameSaverSettings : ScriptableObject
     {
+
         [System.Serializable]
         public class ProfileOverride
         {
@@ -17,6 +20,9 @@ namespace Recstazy.GameSaver
         }
 
         #region Fields
+
+        [SerializeField]
+        private Serializator _serializator = Serializator.JsonUtility;
 
         [SerializeField]
         [Tooltip("Save file name without \".json\"")]
@@ -94,10 +100,11 @@ namespace Recstazy.GameSaver
         public bool EncryptInRelease { get => _encryptInRelease; }
         /// <summary> 0 will disable encryption completely </summary>
         public int EncryptionKey { get => _encryptionKey; }
-        
+
         public ScriptableSaveDataBase SaveOverride { get => _saveOverride; }
         public ProfileOverride[] ProfileOverrides { get => _profileOverrides; }
-        
+        public Serializator SerializatorType { get => _serializator; }
+
         #endregion
 
         internal bool TryGetProfileOverride<T>(string name, out ScriptableSaveDataGeneric<T> profile) where T : new()
