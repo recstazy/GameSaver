@@ -161,7 +161,7 @@ namespace Recstazy.GameSaver
                 {
                     obj = JsonConvert.DeserializeObject<T>(json);
                 }
-                catch (System.ArgumentException)
+                catch (JsonReaderException)
                 {
                     Debug.LogError("Decryption of json save failed");
                 }
